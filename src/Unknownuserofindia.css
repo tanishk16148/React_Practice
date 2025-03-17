@@ -1,0 +1,119 @@
+.container {
+    text-align: center;
+    margin-top: 50px;
+    font-family: "Georgia", serif;
+    color: #8B6F47;
+    background-color: #f9f5ec;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    max-height: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Flexbox */
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-height: 100%;
+}
+
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Adjust space between input and preview */
+}
+
+/* Input (Left Side) */
+.input-section {
+    width: 45%;
+    text-align: left;
+}
+
+/* Input */
+.input-field {
+    font-size: 18px;
+    font-family: "Georgia", serif;
+    color: #8B6F47;
+    border: 2px solid #D4A017;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: #fffdf5;
+    text-align: center;
+}
+
+.input-field-select{
+    font-size: 18px;
+    font-family: "Georgia", serif;
+    color: #8B6F47;
+    border: 2px solid #D4A017;
+    padding: 10px;
+    border-radius: 5px;
+    width: 104.5%;
+    margin-bottom: 10px;
+    background-color: #fffdf5;
+    text-align: center;
+}
+
+/* Preview (Right Side) */
+.preview-section {
+    width: 50%;
+    text-align: center;
+}
+
+/* Buttons */
+.button {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #D4A017;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin-top: 10px;
+    margin-left: 175px;
+}
+
+/* Certificate button */
+.button_certificate{
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #D4A017;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.button_certificate:hover {
+    background-color: #3ce100;
+}
+
+.button:hover {
+    background-color: #b8900c;
+}
+
+/* Preview */
+.embed-pdf {
+    width: 100%;
+    max-width: 500px;
+    height: 350px;
+    border: 2px solid #D4A017;
+    border-radius: 5px;
+}
