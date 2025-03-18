@@ -9,7 +9,7 @@ function Register() {
         
         setTimeout(() =>{
           window.location.href = "/dash"
-        })
+        },1000)
       }
 
   return (

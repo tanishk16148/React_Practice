@@ -8,6 +8,10 @@ function Dashboard() {
     useEffect(() =>{
         toast.success("Welcome..!!"+" "+ name)
     })
+    // toast.configure({
+    //   autoClose: 8000,
+    //   draggable: false,
+    // });
 
   return (
     <div>

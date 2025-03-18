@@ -22,13 +22,13 @@ function Updatedmailsender() {
             return;
         }
         try {
-            const existingPdfBytes = await fetch("/Participation_comp.pdf").then(res => res.arrayBuffer());
+            const existingPdfBytes = await fetch("/Participation.pdf").then(res => res.arrayBuffer());
             const pdfDoc = await PDFDocument.load(existingPdfBytes);
             const firstPage = pdfDoc.getPages()[0];
 
-            firstPage.drawText(name, { x: 345, y: 310, size: 30, color: rgb(0, 0, 0) });
-            firstPage.drawText(college, { x: 100, y: 275, size: 25, color: rgb(0, 0, 0) });
-            firstPage.drawText(event, { x: 295, y: 244, size: 24, color: rgb(0, 0, 0) });
+            firstPage.drawText(name, { x: 345, y: 313, size: 30, color: rgb(0, 0, 0) });
+            firstPage.drawText(college, { x: 100, y: 280, size: 25, color: rgb(0, 0, 0) });
+            firstPage.drawText(event, { x: 295, y: 247, size: 24, color: rgb(0, 0, 0) });
 
             const pdfBytes = await pdfDoc.save();
             const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
@@ -68,13 +68,13 @@ function Updatedmailsender() {
                 college: college,
                 certificate_url: URL.createObjectURL(pdfBlob), // Temporary URL for preview
                 drive_folder: driveFolderLink, // Google Drive folder link
-                attachments: [
-                    {
-                        filename: `${name}_Certificate.pdf`,
-                        content: base64Pdf,  // Base64 PDF content
-                        encoding: "base64",
-                    },
-                ],
+                // attachments: [
+                //     {
+                //         filename: `${name}_Certificate.pdf`,
+                //         content: base64Pdf,  // Base64 PDF content
+                //         encoding: "base64",
+                //     },
+                // ],
             },
             "BmRr1jYRnTxxKQQ50"   // Your EmailJS Public Key
         ).then(() => {
