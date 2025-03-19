@@ -101,6 +101,7 @@ function Updatedmailsender() {
                         <option value="Rajalakshmi Institute of Technology">Rajalakshmi Institute of Technology</option>
                         <option value="SRM Easwari Engineering College">SRM Easwari Engineering College</option>
                         <option value="VELS University">VELS University</option>
+                        <option value="Sri Sairam Institute of Technology">Sri Sairam Institute of Technology</option>
                         <option value="Sri Sairam Engineering College">Sri Sairam Engineering College</option>
                         <option value="Rajalakshmi Engineering College">Rajalakshmi Engineering College</option>
                         <option value="Chennai Institute of Technology">Chennai Institute of Technology</option>
