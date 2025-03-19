@@ -8,6 +8,7 @@ import Dashboard from './Dashboard'
 import Unknownuserofindia from './Unknownuserofindia'
 import Validation from './Validation'
 import Updatedmailsender from './Updatedmailsender'
+import CertificateLogin from './CertificateLogin'
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
       <Route path='/dash' element={<Dashboard/>}/>
       <Route path='/cert' element={<Unknownuserofindia/>}/>
       <Route path='/valid' element={<Validation/>}/>
-      <Route path='/updcert' element={<Updatedmailsender/>}/>
+      <Route path='/certificate' element={<Updatedmailsender/>}/>
+      <Route path='/certlogin' element={<CertificateLogin/>}/>
       </Routes>
       </Router>
     </div>

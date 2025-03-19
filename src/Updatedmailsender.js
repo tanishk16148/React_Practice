@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PDFDocument, rgb } from "pdf-lib";
 import { saveAs } from "file-saver";
 import { toast, ToastContainer } from "react-toastify";
@@ -12,17 +12,24 @@ function Updatedmailsender() {
     const [college, setCollege] = useState("");
     const [email, setEmail] = useState("");
     const [pdfBlob, setPdfBlob] = useState(null);
-    const [pdfUrl, setPdfUrl] = useState(""); // URL for preview
+    const [pdfUrl, setPdfUrl] = useState(""); // PDF preview URL
 
     const driveFolderLink = "https://drive.google.com/drive/folders/1TX5WRCzEaV3JoClrmdcMzA-ucsBCECmR?usp=sharing";
 
+    useEffect(() => {
+        return () => {
+            if (pdfUrl) URL.revokeObjectURL(pdfUrl); // Cleanup
+        };
+    }, [pdfUrl]);
+
     const handleGenerate = async () => {
         if (!name || !event || !college || !email) {
-            toast.error("❌ PLEASE FILL ALL THE FIELDS!");
+            toast.error("❌ Please fill all the fields!");
             return;
         }
+
         try {
-            const existingPdfBytes = await fetch("/Participation.pdf").then(res => res.arrayBuffer());
+            const existingPdfBytes = await fetch(`${process.env.PUBLIC_URL}/Participation.pdf`).then(res => res.arrayBuffer());
             const pdfDoc = await PDFDocument.load(existingPdfBytes);
             const firstPage = pdfDoc.getPages()[0];
 
@@ -34,56 +41,50 @@ function Updatedmailsender() {
             const pdfBlob = new Blob([pdfBytes], { type: "application/pdf" });
 
             setPdfBlob(pdfBlob);
-            setPdfUrl(URL.createObjectURL(pdfBlob)); // Create URL for preview
+            const pdfUrl = URL.createObjectURL(pdfBlob);
+            setPdfUrl(pdfUrl);
 
             toast.success(`🎉 Certificate Generated for ${name}`);
             console.log("✅ PDF Generated Successfully");
 
-            // Convert PDF Blob to Base64
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                const base64Pdf = reader.result.split(',')[1]; // Get base64 part of the result
-                sendEmail(email, base64Pdf, pdfBlob); // Send base64-encoded PDF
-            };
-            reader.readAsDataURL(pdfBlob);
+            sendEmail(email, pdfBlob);
         } catch (error) {
             console.error("❌ Error generating certificate:", error);
             toast.error("Failed to generate certificate!");
         }
     };
 
-    const sendEmail = (recipientEmail, base64Pdf, pdfBlob) => {
+    const sendEmail = (recipientEmail, pdfBlob) => {
         if (!recipientEmail || !recipientEmail.includes("@")) {
             toast.error("❌ Invalid email address!");
             return;
         }
 
-        emailjs.send(
-            "service_wgep7ie",   // Your EmailJS Service ID
-            "template_v5eyhub",  // Your EmailJS Template ID
-            {
-                to_email: recipientEmail,
-                name: name, 
-                event: event,
-                college: college,
-                certificate_url: URL.createObjectURL(pdfBlob), // Temporary URL for preview
-                drive_folder: driveFolderLink, // Google Drive folder link
-                // attachments: [
-                //     {
-                //         filename: `${name}_Certificate.pdf`,
-                //         content: base64Pdf,  // Base64 PDF content
-                //         encoding: "base64",
-                //     },
-                // ],
-            },
-            "BmRr1jYRnTxxKQQ50"   // Your EmailJS Public Key
-        ).then(() => {
-            toast.success("📧 Email Sent Successfully to " + recipientEmail);
-            console.log("✅ Email Sent to:", recipientEmail);
-        }).catch(error => {
-            console.error("❌ Email sending error:", error);
-            toast.error("❌ Failed to send email.");
-        });
+        const reader = new FileReader();
+        reader.readAsDataURL(pdfBlob);
+        reader.onloadend = () => {
+            const base64Pdf = reader.result.split(',')[1];
+
+            emailjs.send(
+                "service_wgep7ie",  
+                "template_v5eyhub", 
+                {
+                    to_email: recipientEmail,
+                    name: name, 
+                    event: event,
+                    college: college,
+                    certificate_url: pdfUrl,
+                    drive_folder: driveFolderLink,
+                },
+                "BmRr1jYRnTxxKQQ50"
+            ).then(() => {
+                toast.success("📧 Email Sent Successfully to " + recipientEmail);
+                console.log("✅ Email Sent to:", recipientEmail);
+            }).catch(error => {
+                console.error("❌ Email sending error:", error);
+                toast.error("❌ Failed to send email.");
+            });
+        };
     };
 
     return (
@@ -108,7 +109,7 @@ function Updatedmailsender() {
                         <option value="RMK Engineering College">RMK Engineering College</option>
                         <option value="RMD Engineering College">RMD Engineering College</option>
                         <option value="RMK College Of Engineering And Technology">RMK College Of Engineering And Technology</option>
-                        <option value="T.J.S. Engineering college">T.J.S. Engineering college</option>
+                        <option value="T.J.S. Engineering College">T.J.S. Engineering College</option>
                         <option value="Velammal Institute of Technology">Velammal Institute of Technology</option>
                     </select>
 
