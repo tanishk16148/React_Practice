@@ -4,6 +4,7 @@ import "./CertificateLogin.css";
 
 const users = [
     { username: "mrtanos_16", password: "1234tanishk" },
+    { username: "mokshaaa", password: "tharun" },
     { username: "codegamble", password: "1234codegamble" },
     { username: "paper", password: "paper@123" },
     { username: "codex", password: "codex123" },
@@ -49,7 +50,7 @@ function CertificateLogin() {
             setIsLoggedIn(true);
             setTimeout(() => {
                 navigate("/certificate");
-            }, 500);
+            }, 2000);
         } else {
             setError("❌ Invalid Username or Password!");
         }
