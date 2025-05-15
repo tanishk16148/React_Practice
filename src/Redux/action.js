@@ -3,7 +3,7 @@ export const addNumber = (value) => ({
     payload : value,
 })
 
-export const subractNumber = (value)=>({
+export const subtractNumber = (value)=>({
     type: "SUBTRACT",
     payload: value
 })

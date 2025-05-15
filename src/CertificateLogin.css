@@ -36,6 +36,16 @@
     margin-left: -10px;
 }
 
+.wraper{
+    background-color: black;
+    height: 100vh;
+  }
+  
+  
+  .wraper2{
+    background-color: white;
+  }
+
 /* Button styling */
 .button11 {
     width: 107.5%;
